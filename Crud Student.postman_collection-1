@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "12c78966-5d9a-4449-8af9-99e7ee48093d",
+		"_postman_id": "67f9df1c-4844-4c55-91e1-f1bfc517a14c",
 		"name": "Crud Student",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -9,7 +9,10 @@
 			"name": "ADD STUDENT",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -17,7 +20,10 @@
 			"name": "SHOW SPECIFIC DATA",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -25,7 +31,10 @@
 			"name": "SHOW STUDENT",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -33,7 +42,10 @@
 			"name": "UPDATE STUDENT",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -41,7 +53,10 @@
 			"name": "DELETE STUDENT",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -73,7 +88,10 @@
 			"name": "REGISTER",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -81,7 +99,10 @@
 			"name": "LOGOUT",
 			"request": {
 				"method": "GET",
-				"header": []
+				"header": [],
+				"url": {
+					"raw": ""
+				}
 			},
 			"response": []
 		},
@@ -126,6 +147,14 @@
 						"login"
 					]
 				}
+			},
+			"response": []
+		},
+		{
+			"name": "logged_user",
+			"request": {
+				"method": "GET",
+				"header": []
 			},
 			"response": []
 		}

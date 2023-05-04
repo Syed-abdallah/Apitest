@@ -33,4 +33,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/delete/{id?}',[StudentController::class,'destroy']);
     Route::get('/search/{city?}',[StudentController::class,'search']);
     Route::post('/logout',[StudentController::class,'logout']);
+    Route::get('/user_logged',[StudentController::class,'user_logged']);
 });

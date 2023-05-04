@@ -128,6 +128,12 @@ class StudentController extends Controller
             'message'=>'token sussessfully delete'
         ]);
     }
+    public function user_logged(){
+       $user =  Auth()->user();
+        return response([
+            'user'=>$user,
+        ],200);
+    }
     public function login(Request $request){
   
         $request->validate([
