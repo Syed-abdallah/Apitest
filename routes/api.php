@@ -14,9 +14,7 @@ use App\Http\Controllers\StudentController;
 |
 */
 
-// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::middleware('auth:sanctum')->get('/showdata',[StudentController::class,'index']);
 
 
 
@@ -24,6 +22,15 @@ Route::get('/student', function () {
     echo 'API TEST';
 });
 
-Route::get('/showdata',[StudentController::class,'index']);
-Route::get('/showdata/{id?}',[StudentController::class,'show']);
-Route::post('/create',[StudentController::class,'create']);
+
+Route::post ('/register_student',[StudentController::class,'register']);
+Route::post ('/login',[StudentController::class,'login']);
+
+Route::group(['middleware' => 'auth:sanctum'], function () {
+    Route::get('/showdata/{id?}',[StudentController::class,'show']);
+    Route::post('/create',[StudentController::class,'create']);
+    Route::post('/update/{id?}',[StudentController::class,'update']);
+    Route::get('/delete/{id?}',[StudentController::class,'destroy']);
+    Route::get('/search/{city?}',[StudentController::class,'search']);
+    Route::post('/logout',[StudentController::class,'logout']);
+});
