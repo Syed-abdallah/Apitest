@@ -161,8 +161,26 @@ class StudentController extends Controller
         
     }
 }
+
+public function change_password(Request $request){
+       $request->validate([
+            'email' => 'required',
+            'password'=>'required',         
+        ]);
+        $user = User::where('email',auth()->user()->email)->first();
+        $user->password = hash::make($request->password);
+        $user->email = $request->email;  
+        $user->save();
+
+        // var_dump('password update successfully');
+        return response([
+            'msg'=>'password updated',
+            'user'=>$user,
+        ]); 
+}
+
+
+
 }
      
     
-
-

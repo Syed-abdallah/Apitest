@@ -157,6 +157,22 @@
 				"header": []
 			},
 			"response": []
+		},
+		{
+			"name": "change_password",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "send_email_for_email_password",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	]
 }

@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
+use App\Http\Controllers\PasswordResetController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -25,6 +26,24 @@ Route::get('/student', function () {
 
 Route::post ('/register_student',[StudentController::class,'register']);
 Route::post ('/login',[StudentController::class,'login']);
+Route::post ('/send_email',[PasswordResetController::class,'reset_email_password']);
+Route::get ('/update_reset_password',[PasswordResetController::class,'update_reset_password']);
+
+
+Route::get('update_reset_password/{token}', [PasswordResetController::class, 'update_reset_password'])->name('update_reset_password');
+Route::post('update_reset_password', [PasswordResetController::class, 'updated_reset_password']);
+
+
+
+
+
+
+
+
+
+
+
+
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/showdata/{id?}',[StudentController::class,'show']);
@@ -34,4 +53,5 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::get('/search/{city?}',[StudentController::class,'search']);
     Route::post('/logout',[StudentController::class,'logout']);
     Route::get('/user_logged',[StudentController::class,'user_logged']);
+    Route::post('/change_password',[StudentController::class,'change_password']);
 });
