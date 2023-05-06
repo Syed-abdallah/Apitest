@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\PasswordResetController;
+
+use App\Http\Controllers\imageCrudController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -26,16 +28,23 @@ Route::get('/student', function () {
 
 Route::post ('/register_student',[StudentController::class,'register']);
 Route::post ('/login',[StudentController::class,'login']);
+
+
+
+
+// password reset by email
+
 Route::post ('/send_email',[PasswordResetController::class,'reset_email_password']);
 Route::get ('/update_reset_password',[PasswordResetController::class,'update_reset_password']);
-
-
 Route::get('update_reset_password/{token}', [PasswordResetController::class, 'update_reset_password'])->name('update_reset_password');
 Route::post('/reset/{token}', [PasswordResetController::class, 'reset'])->name('reset');
 
+// password reset by email end
 
 
 
+// image crud
+Route::post ('/insertimage',[imageCrudController::class,'store']);
 
 
 

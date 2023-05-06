@@ -12,7 +12,12 @@ use Illuminate\Auth\Events\PasswordReset;
 
 class PasswordResetController extends Controller
 {
+    
     public function reset_email_password(Request $request){
+        $request->validate([
+            // 'email' => 'required|email|unique:users,email',
+        ]);
+    
         $user = User::where('email',$request->email)->first();
 
      if(!$user){
@@ -59,7 +64,7 @@ public function update_reset_password(Request $request, $token = null)
 public function reset(Request $request, $token)
 {
     // delete the token Older than 1 minute
-    $formatted = Carbon::now()->subMinutes(1)->toDateTimeString();
+    $formatted = Carbon::now()->subMinutes(2)->toDateTimeString();
     password_reset::where('created_at','<=',$formatted)->delete();
 
     $request->validate([
