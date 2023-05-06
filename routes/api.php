@@ -31,7 +31,7 @@ Route::get ('/update_reset_password',[PasswordResetController::class,'update_res
 
 
 Route::get('update_reset_password/{token}', [PasswordResetController::class, 'update_reset_password'])->name('update_reset_password');
-Route::post('update_reset_password', [PasswordResetController::class, 'updated_reset_password']);
+Route::post('/reset/{token}', [PasswordResetController::class, 'reset'])->name('reset');
 
 
 

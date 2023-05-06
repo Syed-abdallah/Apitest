@@ -1,16 +1,19 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Models\user;
-use App\Models\password_reset;
-use Illuminate\Http\Request;
-use Carbon\Carbon;
-use App\Mail\reset_password;
 use Mail;
+use Carbon\Carbon;
+use App\Models\user;
+use App\Mail\reset_password;
+use Illuminate\Http\Request;
+use App\Models\password_reset;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\PasswordReset;
+
 class PasswordResetController extends Controller
 {
     public function reset_email_password(Request $request){
-        $user = user::where('email',$request->email)->first();
+        $user = User::where('email',$request->email)->first();
 
      if(!$user){
     return response([
@@ -53,35 +56,36 @@ public function update_reset_password(Request $request, $token = null)
     return view('update_reset_password',compact('password_reset'));
 
 }
-public function updated_reset_password(Request $request)
+public function reset(Request $request, $token)
 {
-    $data = $request->all();
+    // delete the token Older than 1 minute
+    $formatted = Carbon::now()->subMinutes(1)->toDateTimeString();
+    password_reset::where('created_at','<=',$formatted)->delete();
 
     $request->validate([
-        'email'=>'required|email|exists:admin,email',
-        'password'=>'required|min:5|confirmed',
-        'cpassword'=>'required',
+        'password'=>'required|confirmed',
     ]);
 
-    $check_token = DB::table('users')->where([
-        'email' => $request->email,
-       
-    ])->first();
+    $passwordReset = password_reset::where('token',$token)->first();
 
-    if (!$check_token) {
+    if (!$passwordReset) {
 
-        return back()->withInput()->with('fail', 'Invalid token');
-    } else {
+        return response([
+            'msg' => 'Invalid token or Expired',
+            'status' => 'Failed'
+        ],404);
+    } 
+   $user = User::where('email',$passwordReset->email)->first();
+    $user->password = Hash::make($request->password);
+    $user->save();
 
-        user::where('email', $request->email)->update([
-            'password' => \Hash::make($request->password),
-        ]);
+    // deleting token after resetting password
+    password_reset::where('email',$user->email)->delete();
 
-        password_reset::where('token', $request->token)->delete();
-
-        // return redirect('admin/login')->with('info', 'Your password has been changed! You can login with new password')->with('verifiedEmail', $request->email);
-    }
-
+    return response([
+        'msg' => 'Password Change Successfully',
+        'status' => 'success'
+    ],200);
 }
 
 }

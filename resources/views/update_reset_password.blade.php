@@ -16,9 +16,9 @@
         <div class="col-12 col-md-8 col-lg-4">
           <div class="card shadow-sm">
             <div class="card-body">
-              
-                <form action="/" method="post">
-                    @csrf
+              {{-- <a href="/api-v1/reset">Hellooo Guyss</a> --}}
+                <form action="{{ route('reset') }}" method="post">
+                  
                     <input type="hidden" name="token" value="{{$password_reset['token']}}">
                     <div class="mb-3">
                     <label><strong>Email</strong></label>
@@ -26,12 +26,12 @@
                     </div>
                 <div class="mb-3">
                   <label for="email" class="form-label">New Password</label>
-                  <input type="password" id="email" class="form-control" name="email" placeholder="Enter Your Email"
+                  <input type="password" id="email" class="form-control" name="email" placeholder="Enter New Password"
                     required="">
                 </div>
                 <div class="mb-3">
                   <label for="email" class="form-label">Confirm Password</label>
-                  <input type="password" id="email" class="form-control" name="email" placeholder="Enter Your Email"
+                  <input type="password" id="email" class="form-control" name="email" placeholder="Confirm your Password  "
                     required="">
                 </div>
                 <div class="mb-3 d-grid">
